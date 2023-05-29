@@ -1,0 +1,6 @@
+﻿<Properties StartupConfiguration="{6E229387-3A43-464C-8815-7F92BBF42CD5}|http">
+  <MonoDevelop.Ide.ItemProperties.Ex04.Menus.Delegates FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Ex04.Menus.Interfaces PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" FirstBuild="True" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Ex04.Menus.Test FirstBuild="True" />
+</Properties>
