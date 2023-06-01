@@ -1,18 +1,28 @@
 using System;
 
-namespace Ex04.Menues.Interfaces
+namespace Ex04.Menues.Delegates
 {
+    public delegate void ReportItemWasSelected();
+
     public class MenuItem
     {
         protected List<MenuItem> m_NextMenus;
         private readonly string r_Text;
         protected string m_ExitPoint = "Back";
-        private IOnSelect inSelected;
-        public MenuItem (List<MenuItem> i_NextMenus, string i_Text,IOnSelect i_InSelected)
+        private ReportItemWasSelected m_OnSelect;
+        public MenuItem(List<MenuItem> i_NextMenus, string i_Text)
         {
             this.m_NextMenus = i_NextMenus;
             this.r_Text = i_Text;
-            this.inSelected = i_InSelected; 
+        }
+        public void AttachObserver(ReportItemWasSelected i_ObserverDelegate)
+        {
+            m_OnSelect += i_ObserverDelegate;
+        }
+
+        public void DetachObserver(ReportItemWasSelected i_ObserverDelegate)
+        {
+            m_OnSelect -= i_ObserverDelegate;
         }
 
         public override string ToString()
@@ -23,8 +33,8 @@ namespace Ex04.Menues.Interfaces
         public void nextOption()
         {
             bool validInput = false, keepRuning = true;
-            int itemNumber; 
-           
+            int itemNumber;
+
             while (keepRuning)
             {
                 Console.Clear();
@@ -51,9 +61,12 @@ namespace Ex04.Menues.Interfaces
                 }
                 else
                 {
-                    inSelected.ReportItemWasSelected();
-                    Thread.Sleep(3000);
-                    keepRuning = false;
+                    if (m_OnSelect != null)
+                    {
+                        m_OnSelect.Invoke();
+                        Thread.Sleep(3000);
+                        keepRuning = false;
+                    }
                 }
             }
         }
@@ -80,17 +93,20 @@ namespace Ex04.Menues.Interfaces
 
             Console.WriteLine("--------------------------");
             Console.WriteLine($"Enter your request: (1 to {m_NextMenus.Count} or press '0' to {m_ExitPoint})");
-         
+
             String item = Console.ReadLine();
 
-            validInput =  int.TryParse(item, out i_itemNumber);
+            validInput = int.TryParse(item, out i_itemNumber);
 
             return validInput && isValidInput(i_itemNumber);
         }
 
-        private bool isValidInput(int i_Input){
+        private bool isValidInput(int i_Input)
+        {
             return i_Input >= 0 && i_Input <= m_NextMenus.Count;
         }
+
+
     }
 }
 

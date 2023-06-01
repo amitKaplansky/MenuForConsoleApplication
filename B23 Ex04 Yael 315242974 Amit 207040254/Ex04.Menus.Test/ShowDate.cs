@@ -2,7 +2,7 @@ using Ex04.Menues.Interfaces;
 
 namespace Ex04.Menues.Test
 {
-    public class ShowDate : IInSelected
+    public class ShowDate : IOnSelect
     {
         public void ReportItemWasSelected()
         {

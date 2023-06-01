@@ -2,7 +2,7 @@ using Ex04.Menues.Interfaces;
 
 namespace Ex04.Menues.Test
 {
-    public class CountSpaces : IInSelected
+    public class CountSpaces : IOnSelect
     {
         public void ReportItemWasSelected()
         {
