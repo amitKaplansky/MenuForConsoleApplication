@@ -6,11 +6,11 @@ namespace Ex04.Menues.Test
     {
         public void ReportItemWasSelected()
         {
-            Console.WriteLine("Enter a sentence:");
+            Console.WriteLine("Please enter your sentence");
             string sentence = Console.ReadLine();
 
             int spaceCount = countSpaces(sentence);
-            Console.WriteLine("Number of spaces in the sentence: " + spaceCount);
+            Console.WriteLine($"There are {spaceCount} spaces in your sentence.");
         }
 
         static int countSpaces(string sentence)

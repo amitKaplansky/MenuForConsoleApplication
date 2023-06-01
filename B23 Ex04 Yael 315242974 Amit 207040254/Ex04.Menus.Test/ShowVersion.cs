@@ -6,7 +6,7 @@ namespace Ex04.Menues.Test
     {
         public void ReportItemWasSelected()
         {
-            Console.WriteLine("Version:23.2.4.9805");
+            Console.WriteLine("Version: 23.2.4.9805");
         }
     }
 }

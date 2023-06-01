@@ -9,7 +9,8 @@ namespace Ex04.Menues.Delegates
         protected List<MenuItem> m_NextMenus;
         private readonly string r_Text;
         protected string m_ExitPoint = "Back";
-        private ReportItemWasSelected m_OnSelect;
+        public event ReportItemWasSelected Selected;
+
         public MenuItem(List<MenuItem> i_NextMenus, string i_Text)
         {
             this.m_NextMenus = i_NextMenus;
@@ -17,12 +18,12 @@ namespace Ex04.Menues.Delegates
         }
         public void AttachObserver(ReportItemWasSelected i_ObserverDelegate)
         {
-            m_OnSelect += i_ObserverDelegate;
+            Selected += i_ObserverDelegate;
         }
 
         public void DetachObserver(ReportItemWasSelected i_ObserverDelegate)
         {
-            m_OnSelect -= i_ObserverDelegate;
+            Selected -= i_ObserverDelegate;
         }
 
         public override string ToString()
@@ -30,48 +31,49 @@ namespace Ex04.Menues.Delegates
             return r_Text;
         }
 
-        public void nextOption()
+        protected virtual void OnSelect()
         {
-            bool validInput = false, keepRuning = true;
+            bool validInput = false, keepRunning = true;
             int itemNumber;
 
-            while (keepRuning)
+            while (keepRunning)
             {
                 Console.Clear();
                 if (m_NextMenus != null)
                 {
-                    PrintNextMenu();
+                    printNextMenu();
                     validInput = getUserInput(out itemNumber);
 
                     if (validInput)
                     {
                         if (itemNumber != 0)
                         {
-                            m_NextMenus[itemNumber - 1].nextOption();
+                            m_NextMenus[itemNumber - 1].OnSelect();
                         }
                         else
                         {
-                            keepRuning = false;
+                            keepRunning = false;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("incorrect input");
+                        Console.WriteLine("Incorrect input, try again");
+                        Thread.Sleep(2000);
                     }
                 }
                 else
                 {
-                    if (m_OnSelect != null)
+                    if (Selected != null)
                     {
-                        m_OnSelect.Invoke();
-                        Thread.Sleep(3000);
-                        keepRuning = false;
+                        Selected.Invoke();
+                        Thread.Sleep(4000);
+                        keepRunning = false;
                     }
                 }
             }
         }
 
-        private void PrintNextMenu()
+        private void printNextMenu()
         {
             int i = 0;
 
@@ -92,7 +94,7 @@ namespace Ex04.Menues.Delegates
             bool validInput = false;
 
             Console.WriteLine("--------------------------");
-            Console.WriteLine($"Enter your request: (1 to {m_NextMenus.Count} or press '0' to {m_ExitPoint})");
+            Console.WriteLine($"Enter your request: (1 to {m_NextMenus.Count} or press '0' to {m_ExitPoint}).");
 
             String item = Console.ReadLine();
 

@@ -12,7 +12,7 @@ namespace Ex04.Menues.Interfaces
 
         public void Show()
         {
-           nextOption();
+           NextOption();
         }
     }
 }

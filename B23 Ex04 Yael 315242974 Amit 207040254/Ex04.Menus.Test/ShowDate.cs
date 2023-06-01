@@ -7,7 +7,8 @@ namespace Ex04.Menues.Test
         public void ReportItemWasSelected()
         {
             DateTime todayDate = DateTime.Now;
-            Console.WriteLine(todayDate);
+            string formattedDate = todayDate.ToString("dd-MM-yyyy");
+            Console.WriteLine($"The Date is: {formattedDate}");
         }
     }
 }
