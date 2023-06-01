@@ -13,7 +13,6 @@ namespace Ex04.Menus.Test
         {
             Menus menus = new Menus();
 
-
             menus.RunMenus();
         }
 

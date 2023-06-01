@@ -24,11 +24,10 @@ namespace Ex04.Menus.Test
 
             Interfaces.MenuItem dateAndTime;
             Interfaces.MenuItem versionAndSpace;
-            Interfaces.MenuItem showDateOption = new Interfaces.MenuItem(null, "show date", new ShowDate());
-            Interfaces.MenuItem showTimeOption = new Interfaces.MenuItem(null, "show time", new ShowTime());
-            Interfaces.MenuItem showVersion = new Interfaces.MenuItem(null, "show version", new ShowVersion());
-            Interfaces.MenuItem countSpaces = new Interfaces.MenuItem(null, "show version", new CountSpaces());
-
+            Interfaces.MenuItem showDateOption = new Interfaces.MenuItem(null, "Show Date", new ShowDate());
+            Interfaces.MenuItem showTimeOption = new Interfaces.MenuItem(null, "Show Time", new ShowTime());
+            Interfaces.MenuItem showVersion = new Interfaces.MenuItem(null, "Show Version", new ShowVersion());
+            Interfaces.MenuItem countSpaces = new Interfaces.MenuItem(null, "Count Spaces", new CountSpaces());
 
             subMenu1.Add(showTimeOption);
             subMenu1.Add(showDateOption);
@@ -40,8 +39,7 @@ namespace Ex04.Menus.Test
             
             firstMenu.Add(dateAndTime);
             firstMenu.Add(versionAndSpace);
-            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu(firstMenu, "Show Date/Time", null);
-
+            Interfaces.MainMenu mainMenu = new Interfaces.MainMenu(firstMenu, "Interface Main Menu", null);
 
             return mainMenu;
         }
@@ -59,15 +57,14 @@ namespace Ex04.Menus.Test
 
             Delegates.MenuItem dateAndTime;
             Delegates.MenuItem versionAndSpace;
-            Delegates.MenuItem showDateOption = new Delegates.MenuItem(null, "show date");
+            Delegates.MenuItem showDateOption = new Delegates.MenuItem(null, "Show Date");
             showDateOption.AttachObserver(showDate.ReportItemWasSelected);
-            Delegates.MenuItem showTimeOption = new Delegates.MenuItem(null, "show time");
+            Delegates.MenuItem showTimeOption = new Delegates.MenuItem(null, "Show Time");
             showTimeOption.AttachObserver(showTime.ReportItemWasSelected);
-            Delegates.MenuItem showVersionOption = new Delegates.MenuItem(null, "show version");
+            Delegates.MenuItem showVersionOption = new Delegates.MenuItem(null, "Show Version");
             showVersionOption.AttachObserver(showVersion.ReportItemWasSelected);
-            Delegates.MenuItem countSpacesOption = new Delegates.MenuItem(null, "show version");
+            Delegates.MenuItem countSpacesOption = new Delegates.MenuItem(null, "Count Spaces");
             countSpacesOption.AttachObserver(countSpaces.ReportItemWasSelected);
-
 
             subMenu1.Add(showTimeOption);
             subMenu1.Add(showDateOption);
@@ -79,8 +76,7 @@ namespace Ex04.Menus.Test
 
             firstMenu.Add(dateAndTime);
             firstMenu.Add(versionAndSpace);
-            Delegates.MainMenu mainMenu = new Delegates.MainMenu(firstMenu, "Show Date/Time");
-
+            Delegates.MainMenu mainMenu = new Delegates.MainMenu(firstMenu, "Delegates Main Menu");
 
             return mainMenu;
         }

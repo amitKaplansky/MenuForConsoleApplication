@@ -8,7 +8,7 @@ namespace Ex04.Menues.Test
         {
             DateTime currentTime = DateTime.Now;
             string formattedTime = currentTime.ToString("HH:mm:ss");
-            Console.WriteLine(formattedTime);
+            Console.WriteLine($"The Hour is: {formattedTime}");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Ex04.Menues.Delegates
         public void Show()
         {
 
-            nextOption();
+            OnSelect();
 
         }
     }

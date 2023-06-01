@@ -7,12 +7,13 @@ namespace Ex04.Menues.Interfaces
         protected List<MenuItem> m_NextMenus;
         private readonly string r_Text;
         protected string m_ExitPoint = "Back";
-        private IOnSelect inSelected;
+        private IOnSelect m_OnSelect;
+
         public MenuItem (List<MenuItem> i_NextMenus, string i_Text,IOnSelect i_InSelected)
         {
             this.m_NextMenus = i_NextMenus;
             this.r_Text = i_Text;
-            this.inSelected = i_InSelected; 
+            this.m_OnSelect = i_InSelected; 
         }
 
         public override string ToString()
@@ -20,45 +21,46 @@ namespace Ex04.Menues.Interfaces
             return r_Text;
         }
 
-        public void nextOption()
+        public void NextOption()
         {
-            bool validInput = false, keepRuning = true;
+            bool validInput = false, keepRunning = true;
             int itemNumber; 
            
-            while (keepRuning)
+            while (keepRunning)
             {
                 Console.Clear();
                 if (m_NextMenus != null)
                 {
-                    PrintNextMenu();
+                    printNextMenu();
                     validInput = getUserInput(out itemNumber);
 
                     if (validInput)
                     {
                         if (itemNumber != 0)
                         {
-                            m_NextMenus[itemNumber - 1].nextOption();
+                            m_NextMenus[itemNumber - 1].NextOption();
                         }
                         else
                         {
-                            keepRuning = false;
+                            keepRunning = false;
                         }
                     }
                     else
                     {
-                        Console.WriteLine("incorrect input");
+                        Console.WriteLine("Incorrect input, try again");
+                        Thread.Sleep(2000);
                     }
                 }
                 else
                 {
-                    inSelected.ReportItemWasSelected();
+                    m_OnSelect.ReportItemWasSelected();
                     Thread.Sleep(3000);
-                    keepRuning = false;
+                    keepRunning = false;
                 }
             }
         }
 
-        private void PrintNextMenu()
+        private void printNextMenu()
         {
             int i = 0;
 
@@ -79,7 +81,7 @@ namespace Ex04.Menues.Interfaces
             bool validInput = false;
 
             Console.WriteLine("--------------------------");
-            Console.WriteLine($"Enter your request: (1 to {m_NextMenus.Count} or press '0' to {m_ExitPoint})");
+            Console.WriteLine($"Enter your request: (1 to {m_NextMenus.Count} or press '0' to {m_ExitPoint}).");
          
             String item = Console.ReadLine();
 
